@@ -13,7 +13,7 @@ class FunnelDistribution(Dataset):
         assert all([batch_size > 0, num_batches > 0])
 
         for _ in xrange(num_batches):
-            yield generate_points(batch_size)
+            yield (generate_points(num_points=batch_size),)
 
     def has_targets(self):
         return False
