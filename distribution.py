@@ -1,5 +1,7 @@
 import numpy as np
 from pylearn2.datasets.dataset import Dataset
+from pylearn2.datasets.dense_design_matrix import DenseDesignMatrix
+
 
 def generate_points(num_points=1000):
     y = np.random.normal(scale=3.0, size=(num_points, 1))
@@ -7,6 +9,8 @@ def generate_points(num_points=1000):
 
     return np.hstack((y, x)).astype('float32')
 
+np.random.seed(2013)
+X = generate_points(100000)
 
 class FunnelIterator(object):
     stochastic = False
@@ -27,10 +31,10 @@ class FunnelIterator(object):
             self.remaining_batches -= 1
             return (generate_points(num_points=self.batch_size),)
 
-
 class FunnelDistribution(Dataset):
     def iterator(self, batch_size=100, num_batches=100, **kwargs):
         return FunnelIterator(batch_size, num_batches)
 
     def has_targets(self):
         return False
+

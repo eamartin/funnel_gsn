@@ -23,7 +23,7 @@ class FunnelGSNCost(GSNCost):
         chans['x_std'] = T.std(data[0][:, 0])
 
         likelihood = T.exp(-T.sqr(samples) / 18.0) / T.sqrt(18.0 * math.pi)
-        chans['y_ll'] = T.sum(T.log(likelihood))
+        #chans['y_ll'] = T.sum(T.log(likelihood))
         chans['y_mean'] = T.mean(samples)
         chans['y_std'] = T.std(samples)
 
